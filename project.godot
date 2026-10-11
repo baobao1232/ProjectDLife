@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Inventorymanager="*uid://cg63dgwvamb5e"
 Equipmentmanager="*uid://f46vk05p7mp2"
+ItemDatabase="*uid://cojvx2qmbqgx2"
 
 [display]
 

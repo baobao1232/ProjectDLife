@@ -12,7 +12,9 @@ extends CharacterBody2D
 @export var test_item: ItemData
 var current_interactable: Area2D = null
 var facing_direction: int = 1
-
+var network_aim_angle: float = 0.0
+var display_aim_angle: float = 0.0
+var network_aim_received: bool = false
 # =========================================================
 # MULTIPLAYER - BỔ SUNG, GIỮ NGUYÊN CÁC HỆ THỐNG CŨ
 # =========================================================
@@ -186,11 +188,11 @@ func _network_physics_process(delta: float) -> void:
 		if remote_direction.length_squared() > 0.001:
 			update_walk_animation(remote_direction, delta)
 			idle_time = 0.0
-			if absf(remote_direction.x) > 0.01:
-				facing_direction = 1 if remote_direction.x > 0.0 else -1
-				$Visual.scale.x = float(facing_direction)
 		else:
 			update_idle_animation(delta)
+
+		if network_aim_received:
+			_update_remote_aim(delta)
 		return
 
 	# Player local gửi hướng đi lên NetworkManager; server mới quyết định vị trí.
@@ -202,9 +204,11 @@ func _network_physics_process(delta: float) -> void:
 		if direction.length() > 1.0:
 			direction = direction.normalized()
 
+	var aim_angle: float = (get_global_mouse_position() - global_position).angle()
+
 	var network_manager: Node = get_tree().current_scene.find_child("NetworkManager", true, false)
 	if network_manager != null and network_manager.has_method("send_player_input"):
-		network_manager.send_player_input(direction)
+		network_manager.send_player_input(direction, aim_angle)
 
 	if direction.length_squared() > 0.0:
 		update_walk_animation(direction, delta)
@@ -1393,3 +1397,31 @@ func update_idle_animation(delta: float) -> void:
 			breathe * idle_head_bob
 		)
 	)
+func apply_network_aim(angle: float) -> void:
+	if is_local_player:
+		return
+	network_aim_angle = angle
+	# Lần đầu nhận thì snap luôn, không xoay từ 0
+	if not network_aim_received:
+		display_aim_angle = angle
+		network_aim_received = true
+
+
+func _update_remote_aim(delta: float) -> void:
+	# Làm mượt góc, lerp_angle xử lý đúng việc nhảy từ PI sang -PI
+	var blend: float = 1.0 - exp(-25.0 * delta)
+	display_aim_angle = lerp_angle(display_aim_angle, network_aim_angle, blend)
+
+	# Hướng mặt theo hướng ngắm, không đoán từ hướng di chuyển nữa
+	facing_direction = 1 if cos(network_aim_angle) >= 0.0 else -1
+	$Visual.scale.x = float(facing_direction)
+
+	# Điểm ngắm giả đặt rất xa để 2 tay song song với hướng ngắm thật
+	var dir: Vector2 = Vector2.from_angle(display_aim_angle)
+	var arm_right: Node2D = $Visual/ArmRight
+	var arm_left: Node2D = $Visual/ArmLeft
+
+	if not right_hand_melee_attacking:
+		arm_right.look_at(arm_right.global_position + dir * 1000.0)
+	if not left_hand_melee_attacking:
+		arm_left.look_at(arm_left.global_position + dir * 1000.0)

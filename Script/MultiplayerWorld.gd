@@ -185,11 +185,14 @@ func _on_snapshot_received(snapshot: Array) -> void:
 			player.set_player_name("Player_%d" % player_id)
 		if is_local and player.has_method("send_current_equipment_to_server"):
 			player.send_current_equipment_to_server()
-		if not is_local and player.has_method("apply_network_equipment"):
-			player.apply_network_equipment(
-				entry.get("weapon_left", {}),
-				entry.get("weapon_right", {})
-			)
+		if not is_local:
+			if player.has_method("apply_network_aim"):
+				player.apply_network_aim(float(entry.get("aim_angle", 0.0)))
+			if player.has_method("apply_network_equipment"):
+				player.apply_network_equipment(
+					entry.get("weapon_left", {}),
+					entry.get("weapon_right", {})
+				)
 	# Xoa player khong con trong snapshot.
 	for key in spawned_players.keys().duplicate():
 		var player_id := int(key)
