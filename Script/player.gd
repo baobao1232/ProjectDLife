@@ -15,6 +15,7 @@ var facing_direction: int = 1
 var network_aim_angle: float = 0.0
 var display_aim_angle: float = 0.0
 var network_aim_received: bool = false
+var local_aim_angle: float = 0.0
 # =========================================================
 # MULTIPLAYER - BỔ SUNG, GIỮ NGUYÊN CÁC HỆ THỐNG CŨ
 # =========================================================
@@ -150,8 +151,15 @@ func set_network_state(
 	network_managed = true
 	network_player_id = player_id
 	is_local_player = local_player
+
+	print(
+		"[PLAYER STATE] ID: ", network_player_id,
+		" | Local: ", is_local_player
+	)
+
 	if network_has_received_position:
 		var position_delta: Vector2 = world_position - target_network_position
+
 		if position_delta.length_squared() > 0.01:
 			network_move_direction = position_delta.normalized()
 		else:
@@ -163,39 +171,42 @@ func set_network_state(
 		global_position = world_position
 		network_has_received_position = true
 
-	# Chỉ Player cục bộ được camera, tương tác và nhận input.
 	var camera: Camera2D = get_node_or_null("Camera2D")
 	if camera != null:
-		camera.enabled = local_player
+		camera.enabled = is_local_player
 
 	var interaction_area: Area2D = get_node_or_null("InteractionArea")
 	if interaction_area != null:
-		interaction_area.monitoring = local_player
-		interaction_area.monitorable = local_player
+		interaction_area.monitoring = is_local_player
+		interaction_area.monitorable = is_local_player
 
-	# Nếu scene có HurtBox thì chỉ bật hurtbox của nhân vật local ở giai đoạn này.
-	# Đồng bộ sát thương mạng cần được xử lý phía server riêng.
 	var hurt_box: Area2D = get_node_or_null("HurtBox")
 	if hurt_box != null:
-		hurt_box.monitoring = local_player
-		hurt_box.monitorable = local_player
-
+		hurt_box.monitoring = is_local_player
+		hurt_box.monitorable = is_local_player
 
 func _network_physics_process(delta: float) -> void:
-	# Remote player không được đọc input, tương tác hoặc tự bắn từ máy này.
+	# =====================================================
+	# REMOTE PLAYER: không đọc chuột, không đọc input,
+	# chỉ nhận dữ liệu từ server
+	# =====================================================
 	if not is_local_player:
-		var remote_direction: Vector2 = network_move_direction
-		if remote_direction.length_squared() > 0.001:
-			update_walk_animation(remote_direction, delta)
+		if network_move_direction.length_squared() > 0.001:
+			update_walk_animation(network_move_direction, delta)
 			idle_time = 0.0
 		else:
 			update_idle_animation(delta)
+
+		if Engine.get_physics_frames() % 30 == 0:
+			print("[REMOTE] ", name, " nhận góc = ", snappedf(rad_to_deg(network_aim_angle), 1.0))
 
 		if network_aim_received:
 			_update_remote_aim(delta)
 		return
 
-	# Player local gửi hướng đi lên NetworkManager; server mới quyết định vị trí.
+	# =====================================================
+	# LOCAL PLAYER
+	# =====================================================
 	var inventory: Node = get_tree().current_scene.find_child("InventoryUI", true, false)
 	var direction := Vector2.ZERO
 	if inventory == null or not inventory.visible:
@@ -204,11 +215,14 @@ func _network_physics_process(delta: float) -> void:
 		if direction.length() > 1.0:
 			direction = direction.normalized()
 
-	var aim_angle: float = (get_global_mouse_position() - global_position).angle()
+	local_aim_angle = (get_global_mouse_position() - global_position).angle()
+
+	if Engine.get_physics_frames() % 30 == 0:
+		print("[LOCAL] ", name, " gửi góc = ", snappedf(rad_to_deg(local_aim_angle), 1.0))
 
 	var network_manager: Node = get_tree().current_scene.find_child("NetworkManager", true, false)
 	if network_manager != null and network_manager.has_method("send_player_input"):
-		network_manager.send_player_input(direction, aim_angle)
+		network_manager.send_player_input(direction, local_aim_angle)
 
 	if direction.length_squared() > 0.0:
 		update_walk_animation(direction, delta)
@@ -230,7 +244,6 @@ func _network_physics_process(delta: float) -> void:
 		auto_use_right_hand()
 	if left_hand_firing:
 		auto_use_left_hand()
-
 
 func _physics_process(delta: float) -> void:
 	if network_managed:
@@ -330,6 +343,9 @@ func _physics_process(delta: float) -> void:
 # =========================================================
 
 func update_facing() -> void:
+	if network_managed and not is_local_player:
+		return
+
 	var mouse_position: Vector2 = get_global_mouse_position()
 
 	if mouse_position.x > global_position.x:
@@ -337,17 +353,16 @@ func update_facing() -> void:
 	elif mouse_position.x < global_position.x:
 		facing_direction = -1
 
-	if facing_direction == -1:
-		$Visual.scale.x = -1
-	else:
-		$Visual.scale.x = 1
-
+	$Visual.scale.x = float(facing_direction)
 
 # =========================================================
 # AIM HAI TAY
 # =========================================================
 
 func update_arm_aim() -> void:
+	if network_managed and not is_local_player:
+		return
+
 	var mouse_position: Vector2 = get_global_mouse_position()
 
 	if not right_hand_melee_attacking:
@@ -355,7 +370,6 @@ func update_arm_aim() -> void:
 
 	if not left_hand_melee_attacking:
 		$Visual/ArmLeft.look_at(mouse_position)
-
 
 # =========================================================
 # CHUỘT
@@ -1401,27 +1415,25 @@ func apply_network_aim(angle: float) -> void:
 	if is_local_player:
 		return
 	network_aim_angle = angle
-	# Lần đầu nhận thì snap luôn, không xoay từ 0
 	if not network_aim_received:
 		display_aim_angle = angle
 		network_aim_received = true
 
 
 func _update_remote_aim(delta: float) -> void:
-	# Làm mượt góc, lerp_angle xử lý đúng việc nhảy từ PI sang -PI
 	var blend: float = 1.0 - exp(-25.0 * delta)
 	display_aim_angle = lerp_angle(display_aim_angle, network_aim_angle, blend)
 
-	# Hướng mặt theo hướng ngắm, không đoán từ hướng di chuyển nữa
 	facing_direction = 1 if cos(network_aim_angle) >= 0.0 else -1
 	$Visual.scale.x = float(facing_direction)
 
-	# Điểm ngắm giả đặt rất xa để 2 tay song song với hướng ngắm thật
 	var dir: Vector2 = Vector2.from_angle(display_aim_angle)
-	var arm_right: Node2D = $Visual/ArmRight
-	var arm_left: Node2D = $Visual/ArmLeft
-
 	if not right_hand_melee_attacking:
-		arm_right.look_at(arm_right.global_position + dir * 1000.0)
+		$Visual/ArmRight.look_at($Visual/ArmRight.global_position + dir * 1000.0)
 	if not left_hand_melee_attacking:
-		arm_left.look_at(arm_left.global_position + dir * 1000.0)
+		$Visual/ArmLeft.look_at($Visual/ArmLeft.global_position + dir * 1000.0)
+		
+func set_player_name(new_name: String) -> void:
+	var label: Label = get_node_or_null("PlayerName")
+	if label != null:
+		label.text = new_name

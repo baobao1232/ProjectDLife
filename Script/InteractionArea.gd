@@ -37,10 +37,21 @@ func _ready() -> void:
 	queue_redraw()
 
 
+func _is_remote_player() -> bool:
+	var player := get_parent()
+	return player != null \
+		and player.get("network_managed") == true \
+		and player.get("is_local_player") != true
+
+
 func _process(_delta: float) -> void:
+	var player := get_parent()
+	if player != null and player.get("network_managed") == true and player.get("is_local_player") != true:
+		visible = false
+		return
 
+	visible = true
 	update_position()
-
 	queue_redraw()
 
 

@@ -160,34 +160,26 @@ func _on_server_disconnected() -> void:
 # =========================================================
 
 func send_player_input(direction: Vector2, aim_angle: float = 0.0) -> void:
-	if _is_server:
-		return
-
-	if peer == null:
+	if _is_server or peer == null:
 		return
 	if peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED:
 		return
-
 	if not is_finite(direction.x) or not is_finite(direction.y) or not is_finite(aim_angle):
 		return
-
-	var safe_direction := direction.limit_length(1.0)
-	submit_input.rpc_id(1, safe_direction, aim_angle)
-
+	submit_input.rpc_id(1, direction.limit_length(1.0), aim_angle)
 
 @rpc("any_peer", "call_remote", "unreliable")
 func submit_input(direction: Vector2, aim_angle: float) -> void:
 	if not multiplayer.is_server() or not _is_server:
 		return
-
 	var sender_id: int = multiplayer.get_remote_sender_id()
 	if not players.has(sender_id):
 		return
 	if not is_finite(direction.x) or not is_finite(direction.y) or not is_finite(aim_angle):
 		return
-
 	players[sender_id]["input"] = direction.limit_length(1.0)
 	players[sender_id]["aim_angle"] = wrapf(aim_angle, -PI, PI)
+
 
 # Client gui trang bi; server chi luu descriptor da serialize, khong nhan Resource tu client.
 func send_equipment_state(left_item: Dictionary, right_item: Dictionary) -> void:
