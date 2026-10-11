@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemInstance" format=3 uid="uid://bsmt2n0jv31i5"]
+
+[ext_resource type="Script" uid="uid://01fgdbct33ir" path="res://Items/Scripts/ItemOption.gd" id="1_2n11p"]
+[ext_resource type="Resource" uid="uid://cklsal7rnw1u8" path="res://Items/Data/DesertEagle.tres" id="1_oy32l"]
+[ext_resource type="Script" uid="uid://1k7p8yrr35dp" path="res://Items/Scripts/ItemStat.gd" id="2_oy32l"]
+[ext_resource type="Script" uid="uid://27fg4tt8btim" path="res://Items/Scripts/ItemInstance.gd" id="3_85mgj"]
+
+[resource]
+script = ExtResource("3_85mgj")
+item_data = ExtResource("1_oy32l")
+metadata/_custom_type_script = "uid://27fg4tt8btim"

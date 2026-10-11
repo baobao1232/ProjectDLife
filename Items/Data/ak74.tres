@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bjh4toss2cew0"]
+
+[ext_resource type="Texture2D" uid="uid://g8o2lxcvmys4" path="res://Assets/texture/weapon/gun/ak74.png" id="1_1l6y6"]
+[ext_resource type="Script" uid="uid://01fgdbct33ir" path="res://Items/Scripts/ItemOption.gd" id="2_1l6y6"]
+[ext_resource type="Script" uid="uid://rqmkwb13jnd6" path="res://Items/Scripts/ItemData.gd" id="2_rndte"]
+[ext_resource type="Script" uid="uid://1k7p8yrr35dp" path="res://Items/Scripts/ItemStat.gd" id="4_rndte"]
+
+[sub_resource type="Resource" id="Resource_rndte"]
+script = ExtResource("4_rndte")
+min_value = 5.0
+max_value = 15.0
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_7bljd"]
+script = ExtResource("4_rndte")
+type = 1
+min_value = 5.0
+max_value = 20.0
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_c6e8u"]
+script = ExtResource("4_rndte")
+type = 2
+min_value = 50.0
+max_value = 120.0
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_sjg6u"]
+script = ExtResource("4_rndte")
+type = 5
+min_value = 10.0
+max_value = 50.0
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[resource]
+script = ExtResource("2_rndte")
+id = "ak74001"
+item_name = "AK74"
+icon = ExtResource("1_1l6y6")
+world_sprite = ExtResource("1_1l6y6")
+item_type = 0
+equipment_type = 5
+description = "á à đây là súng do LeBao craft, siêu vip"
+grip_position = Vector2(-4, 1)
+muzzle_position = Vector2(13, -3)
+stats = Array[ExtResource("4_rndte")]([SubResource("Resource_rndte"), SubResource("Resource_7bljd"), SubResource("Resource_c6e8u"), SubResource("Resource_sjg6u")])
+metadata/_custom_type_script = "uid://rqmkwb13jnd6"

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://d2euwt4obb112"]
+
+[ext_resource type="Script" uid="uid://bcyenl5t0jl56" path="res://Script/EquipmentSlot.gd" id="1_0hima"]
+[ext_resource type="Texture2D" uid="uid://dvmu5ktxqncju" path="res://Assets/texture/UI/inventory_slot.png" id="1_gojgy"]
+[ext_resource type="Shader" uid="uid://lqgigo0s2knp" path="res://Shader/ItemIcon.gdshader" id="3_7kahv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0hima"]
+shader = ExtResource("3_7kahv")
+shader_parameter/outline_color = Color(1, 0.6, 0.1, 1)
+shader_parameter/outline_size = 1.0
+shader_parameter/glow_size = 4.0
+shader_parameter/glow_strength = 0.7
+shader_parameter/rarity_effect = true
+
+[node name="EquipmentSlot" type="TextureButton" unique_id=531992309]
+texture_filter = 1
+custom_minimum_size = Vector2(16, 16)
+offset_right = 16.0
+offset_bottom = 16.0
+script = ExtResource("1_0hima")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1930136851]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gojgy")
+
+[node name="ItemIcon" type="TextureRect" parent="." unique_id=1344369936]
+material = SubResource("ShaderMaterial_0hima")
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5

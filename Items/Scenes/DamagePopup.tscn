@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dsoqxsvm1ckk5"]
+
+[ext_resource type="Script" uid="uid://dcvvl4ripgng7" path="res://Script/DamagePopup.gd" id="1_ehqa8"]
+
+[node name="DamagePopup" type="Node2D" unique_id=1921116225]
+script = ExtResource("1_ehqa8")
+
+[node name="Label" type="Label" parent="." unique_id=303574493]
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.15, 0.15)
+theme_override_font_sizes/font_size = 30

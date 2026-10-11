@@ -1,0 +1,67 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cklsal7rnw1u8"]
+
+[ext_resource type="Script" uid="uid://01fgdbct33ir" path="res://Items/Scripts/ItemOption.gd" id="1_oj5yq"]
+[ext_resource type="Texture2D" uid="uid://dgs2ffctl2tvl" path="res://Assets/texture/weapon/gun/de.png" id="1_vg1uy"]
+[ext_resource type="Script" uid="uid://rqmkwb13jnd6" path="res://Items/Scripts/ItemData.gd" id="2_vg1uy"]
+[ext_resource type="Script" uid="uid://1k7p8yrr35dp" path="res://Items/Scripts/ItemStat.gd" id="3_xx5f6"]
+
+[sub_resource type="Resource" id="Resource_xx5f6"]
+script = ExtResource("3_xx5f6")
+min_value = 35.0
+max_value = 50.0
+
+[sub_resource type="Resource" id="Resource_k4obj"]
+script = ExtResource("3_xx5f6")
+type = 1
+min_value = 5.0
+max_value = 25.0
+
+[sub_resource type="Resource" id="Resource_fneib"]
+script = ExtResource("3_xx5f6")
+type = 2
+min_value = 100.0
+max_value = 250.0
+
+[sub_resource type="Resource" id="Resource_sys84"]
+script = ExtResource("3_xx5f6")
+type = 3
+min_value = 250.0
+max_value = 350.0
+
+[sub_resource type="Resource" id="Resource_oeeyh"]
+script = ExtResource("3_xx5f6")
+type = 4
+min_value = 2.5
+max_value = 2.5
+
+[sub_resource type="Resource" id="Resource_rcbry"]
+script = ExtResource("3_xx5f6")
+type = 5
+min_value = 700.0
+max_value = 900.0
+
+[sub_resource type="Resource" id="Resource_krlc4"]
+script = ExtResource("3_xx5f6")
+type = 6
+min_value = 7.0
+max_value = 8.0
+
+[sub_resource type="Resource" id="Resource_dp4sa"]
+script = ExtResource("3_xx5f6")
+type = 7
+min_value = 2.5
+max_value = 2.5
+
+[resource]
+script = ExtResource("2_vg1uy")
+id = "DE1"
+item_name = "Desert Eagle"
+icon = ExtResource("1_vg1uy")
+world_sprite = ExtResource("1_vg1uy")
+item_type = 0
+equipment_type = 5
+grip_position = Vector2(-8, 3)
+muzzle_position = Vector2(14, -3.5)
+size = Vector2(0.4, 0.4)
+stats = Array[ExtResource("3_xx5f6")]([SubResource("Resource_xx5f6"), SubResource("Resource_k4obj"), SubResource("Resource_fneib"), SubResource("Resource_sys84"), SubResource("Resource_oeeyh"), SubResource("Resource_rcbry"), SubResource("Resource_krlc4"), SubResource("Resource_dp4sa")])
+metadata/_custom_type_script = "uid://rqmkwb13jnd6"

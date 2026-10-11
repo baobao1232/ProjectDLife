@@ -1,0 +1,121 @@
+[gd_scene format=4 uid="uid://bq5gn2tl7aldc"]
+
+[ext_resource type="Texture2D" uid="uid://bofifmbaripfu" path="res://Assets/tiles/grass.png" id="1_1n76s"]
+[ext_resource type="PackedScene" uid="uid://ddx46w508mi04" path="res://Scene/player.tscn" id="1_yo8lc"]
+[ext_resource type="PackedScene" uid="uid://dlygrgrfim67n" path="res://Scene/WorldItem.tscn" id="2_1n76s"]
+[ext_resource type="Resource" uid="uid://c35jhrohxmd68" path="res://Items/Data/daophay.tres" id="3_xaiwu"]
+[ext_resource type="Resource" uid="uid://bur7ehjvx3nyc" path="res://Items/Data/ak74.tres" id="4_v7l3e"]
+[ext_resource type="PackedScene" uid="uid://b2wnkc5vw885o" path="res://UI/InventoryUI.tscn" id="5_jnwb4"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xaiwu"]
+texture = ExtResource("1_1n76s")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jnwb4"]
+sources/0 = SubResource("TileSetAtlasSource_xaiwu")
+
+[node name="Node2d" type="Node2D" unique_id=738711614]
+y_sort_enabled = true
+texture_filter = 1
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1261014868]
+texture_filter = 1
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAEAAAAAAAQAAAAAAAEAAAAAAAUAAAAAAAEAAAAAAAYAAAAAAAEAAAAAAAcAAAAAAAIAAAABAAcAAAABAAIAAAACAAcAAAABAAIAAAADAAcAAAABAAIAAAAEAAcAAAABAAIAAAAFAAcAAAABAAIAAAAGAAcAAAABAAIAAAAHAAcAAAABAAIAAAAIAAcAAAABAAIAAAAJAAcAAAACAAIAAAAJAAYAAAACAAEAAAAJAAUAAAACAAEAAAAJAAQAAAACAAEAAAAJAAMAAAACAAEAAAAJAAIAAAACAAEAAAAJAAEAAAACAAEAAAAJAAAAAAACAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAAAAAADAAAAAAABAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAABAAAAAAAHAAAAAAABAAAAAAAIAAAAAAABAAAAAAABAAEAAAABAAEAAAACAAIAAAABAAEAAAADAAMAAAABAAEAAAAEAAQAAAABAAEAAAACAAEAAAABAAEAAAADAAEAAAABAAEAAAAEAAEAAAABAAEAAAAFAAEAAAABAAEAAAAGAAEAAAABAAEAAAAHAAEAAAABAAEAAAAIAAEAAAABAAEAAAAIAAIAAAABAAEAAAAHAAIAAAABAAEAAAAHAAMAAAABAAEAAAAIAAQAAAABAAEAAAAHAAQAAAABAAEAAAAHAAUAAAABAAEAAAADAAUAAAABAAEAAAADAAQAAAABAAEAAAACAAQAAAABAAEAAAACAAMAAAABAAEAAAABAAMAAAABAAEAAAABAAIAAAABAAEAAAABAAQAAAABAAEAAAABAAUAAAABAAEAAAABAAYAAAABAAEAAAACAAYAAAABAAEAAAACAAUAAAABAAEAAAADAAYAAAABAAEAAAAEAAYAAAABAAEAAAAEAAUAAAABAAEAAAAFAAUAAAABAAEAAAAFAAQAAAABAAEAAAAFAAMAAAABAAEAAAAFAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAIAAAABAAEAAAAEAAMAAAABAAEAAAAGAAIAAAABAAEAAAAGAAMAAAABAAEAAAAGAAQAAAABAAEAAAAGAAUAAAABAAEAAAAGAAYAAAABAAEAAAAFAAYAAAABAAEAAAAHAAYAAAABAAEAAAAIAAYAAAABAAEAAAAIAAUAAAABAAEAAAAIAAMAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_jnwb4")
+
+[node name="Player" parent="." unique_id=1740533861 instance=ExtResource("1_yo8lc")]
+right_hand_item = ExtResource("3_xaiwu")
+test_item = ExtResource("4_v7l3e")
+
+[node name="WorldItem" parent="." unique_id=951728702 instance=ExtResource("2_1n76s")]
+position = Vector2(69, 55)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1429505131]
+
+[node name="InventoryUI" parent="CanvasLayer" unique_id=443610660 instance=ExtResource("5_jnwb4")]

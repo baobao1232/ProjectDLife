@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://yqd73foywxl0"]
+
+[ext_resource type="Script" uid="uid://daje88va1fjcx" path="res://Script/InventorySlot.gd" id="1_73eiw"]
+[ext_resource type="Texture2D" uid="uid://dvmu5ktxqncju" path="res://Assets/texture/UI/inventory_slot.png" id="1_bm617"]
+[ext_resource type="Shader" uid="uid://lqgigo0s2knp" path="res://Shader/ItemIcon.gdshader" id="3_inuco"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7pgat"]
+shader = ExtResource("3_inuco")
+shader_parameter/outline_color = Color(1, 0.6, 0.1, 1)
+shader_parameter/outline_size = 1.0
+shader_parameter/glow_size = 4.0
+shader_parameter/glow_strength = 0.7
+shader_parameter/rarity_effect = true
+
+[node name="InventorySlot" type="TextureButton" unique_id=2077438023]
+texture_filter = 1
+script = ExtResource("1_73eiw")
+
+[node name="Background" type="TextureRect" parent="." unique_id=864924374]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_bm617")
+
+[node name="ItemIcon" type="TextureRect" parent="." unique_id=566637074]
+material = SubResource("ShaderMaterial_7pgat")
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 35.0
+offset_bottom = 35.0

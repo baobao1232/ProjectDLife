@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dlygrgrfim67n"]
+
+[ext_resource type="Script" uid="uid://ci4h2fy01ww5g" path="res://Script/WorldItem.gd" id="1_l35kh"]
+[ext_resource type="Resource" uid="uid://blvfqq7reqxj1" path="res://Items/Data/Factory/ak74-f.tres" id="2_q1aio"]
+[ext_resource type="Texture2D" uid="uid://ckr86an1k77er" path="res://Assets/texture/button-e-1-sheet.png" id="4_luh4a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_luh4a"]
+size = Vector2(33, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5i0s"]
+atlas = ExtResource("4_luh4a")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wh1r8"]
+atlas = ExtResource("4_luh4a")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pre3j"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_y5i0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wh1r8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="WorldItem" type="Area2D" unique_id=951728702]
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(13, 14)
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_l35kh")
+item_instance = ExtResource("2_q1aio")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=54232965]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1574382598]
+position = Vector2(0, 5.9604645e-07)
+shape = SubResource("RectangleShape2D_luh4a")
+
+[node name="ItemNameLabel" type="Label" parent="." unique_id=1249294277]
+offset_left = -16.666666
+offset_top = -16.666666
+offset_right = 816.6667
+offset_bottom = 326.11862
+scale = Vector2(0.04, 0.04)
+theme_override_font_sizes/font_size = 200
+horizontal_alignment = 1
+
+[node name="InteractButton" type="AnimatedSprite2D" parent="ItemNameLabel" unique_id=1568228376]
+position = Vector2(416.66666, -166.66667)
+scale = Vector2(25, 25)
+sprite_frames = SubResource("SpriteFrames_pre3j")

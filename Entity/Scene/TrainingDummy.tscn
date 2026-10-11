@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://c32bjf2ijmppm"]
+
+[ext_resource type="Script" uid="uid://cyydcro1rjsl1" path="res://Entity/Script/TrainingDummy.gd" id="1_utk8u"]
+[ext_resource type="Texture2D" uid="uid://cow3v7fp7ttnu" path="res://Assets/texture/entity/TrainDummy.png" id="2_5ttt5"]
+[ext_resource type="Script" uid="uid://pjb7iyq2g1t1" path="res://Script/HurtBox.gd" id="2_f8076"]
+[ext_resource type="Script" uid="uid://cllb4iveyvjkr" path="res://Script/HealthComponent.gd" id="3_5ttt5"]
+[ext_resource type="PackedScene" uid="uid://dsoqxsvm1ckk5" path="res://Items/Scenes/DamagePopup.tscn" id="5_5ttt5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8076"]
+size = Vector2(18, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ttt5"]
+size = Vector2(9.5, 15)
+
+[node name="TrainingDummy" type="Node2D" unique_id=306752505]
+texture_filter = 1
+script = ExtResource("1_utk8u")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1481313774]
+texture = ExtResource("2_5ttt5")
+
+[node name="HealthLabel" type="Label" parent="." unique_id=813222875]
+offset_left = -14.0
+offset_top = -21.0
+offset_right = 125.0
+offset_bottom = 18.0
+scale = Vector2(0.2, 0.2)
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+
+[node name="CollisionBody" type="StaticBody2D" parent="." unique_id=394700053]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionBody" unique_id=1896423029]
+position = Vector2(1, 4)
+shape = SubResource("RectangleShape2D_f8076")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=540802390 node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_f8076")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=681479051]
+position = Vector2(-0.75, -0.5)
+shape = SubResource("RectangleShape2D_5ttt5")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=608393464]
+script = ExtResource("3_5ttt5")
+max_health = 1000.0
+
+[node name="DamagePopup2" parent="." unique_id=1460621693 instance=ExtResource("5_5ttt5")]
+position = Vector2(1, 2)
+float_distance = null
+duration = null

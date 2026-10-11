@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://ddx46w508mi04"]
+
+[ext_resource type="Script" uid="uid://b18iup0r6hax6" path="res://Script/player.gd" id="1_jfnpb"]
+[ext_resource type="Script" uid="uid://c2hlcs86l1f1r" path="res://Script/ItemDebug.gd" id="2_3ax7o"]
+[ext_resource type="Script" uid="uid://cllb4iveyvjkr" path="res://Script/HealthComponent.gd" id="3_iw3xq"]
+[ext_resource type="Script" uid="uid://pjb7iyq2g1t1" path="res://Script/HurtBox.gd" id="4_1tffg"]
+[ext_resource type="Texture2D" uid="uid://cu84ws1nredla" path="res://Assets/character/chan_trai.png" id="5_1u0bh"]
+[ext_resource type="Texture2D" uid="uid://bbh2m2x7u4kti" path="res://Assets/character/chan_phai.png" id="6_ef3fo"]
+[ext_resource type="Texture2D" uid="uid://b1lum4nb4543e" path="res://Assets/character/tay_phai.png" id="7_xte71"]
+[ext_resource type="Texture2D" uid="uid://5mfsq5fn2wt2" path="res://Assets/character/than.png" id="8_q3wol"]
+[ext_resource type="Texture2D" uid="uid://d0552ylafs2j8" path="res://Assets/character/head.png" id="9_cpqwe"]
+[ext_resource type="Texture2D" uid="uid://bkya07hfss1y4" path="res://Assets/character/tay_trai.png" id="10_osu18"]
+[ext_resource type="Script" uid="uid://r6hwwg8c7wy6" path="res://Script/InteractionArea.gd" id="11_jqe6g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c31lq"]
+size = Vector2(10, 17)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2dof7"]
+radius = 5.0
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2sw5t"]
+radius = 7.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1740533861]
+z_index = 1
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(14, 13)
+script = ExtResource("1_jfnpb")
+
+[node name="ItemDebug" type="Node2D" parent="." unique_id=1885633374]
+z_index = 1000
+position = Vector2(-1, 3)
+script = ExtResource("2_3ax7o")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=453635032]
+script = ExtResource("3_iw3xq")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1262513158 node_paths=PackedStringArray("health_component")]
+script = ExtResource("4_1tffg")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=590674755]
+shape = SubResource("RectangleShape2D_c31lq")
+
+[node name="Visual" type="Node2D" parent="." unique_id=1929645652]
+position = Vector2(-1, -5)
+
+[node name="PivotLegLeft" type="Node2D" parent="Visual" unique_id=913924711]
+position = Vector2(-2, 11)
+
+[node name="LegLeft" type="Sprite2D" parent="Visual/PivotLegLeft" unique_id=323076986]
+position = Vector2(-1, 2)
+texture = ExtResource("5_1u0bh")
+
+[node name="PivotLegRight" type="Node2D" parent="Visual" unique_id=41799935]
+position = Vector2(4, 11)
+
+[node name="LegRight" type="Sprite2D" parent="Visual/PivotLegRight" unique_id=1886351222]
+position = Vector2(0, 2)
+texture = ExtResource("6_ef3fo")
+
+[node name="ArmLeft" type="Node2D" parent="Visual" unique_id=1752442399]
+position = Vector2(5, 6)
+
+[node name="ArmSprite" type="Sprite2D" parent="Visual/ArmLeft" unique_id=1645219405]
+position = Vector2(1, 2)
+texture = ExtResource("7_xte71")
+
+[node name="LeftHandItem" type="Node2D" parent="Visual/ArmLeft" unique_id=1232537345]
+position = Vector2(1, 3)
+
+[node name="ItemSprite" type="Sprite2D" parent="Visual/ArmLeft/LeftHandItem" unique_id=1861701692]
+position = Vector2(5, -1)
+scale = Vector2(0.6, 0.6)
+
+[node name="Body" type="Sprite2D" parent="Visual" unique_id=1275931372]
+position = Vector2(1, 9)
+texture = ExtResource("8_q3wol")
+
+[node name="Head" type="Sprite2D" parent="Visual" unique_id=2027455835]
+position = Vector2(0, -1)
+texture = ExtResource("9_cpqwe")
+
+[node name="ArmRight" type="Node2D" parent="Visual" unique_id=227962606]
+position = Vector2(-4, 6)
+
+[node name="RightHandItem" type="Node2D" parent="Visual/ArmRight" unique_id=1722041652]
+position = Vector2(-1, 3)
+
+[node name="ItemSprite" type="Sprite2D" parent="Visual/ArmRight/RightHandItem" unique_id=1180610074]
+position = Vector2(5, -1)
+scale = Vector2(0.6, 0.6)
+
+[node name="ArmSprite" type="Sprite2D" parent="Visual/ArmRight" unique_id=1073268719]
+position = Vector2(-1, 2)
+texture = ExtResource("10_osu18")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=572601706]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_2dof7")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1081535741]
+visible = false
+zoom = Vector2(4, 4)
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=392529493]
+visible = false
+position = Vector2(1, 9)
+script = ExtResource("11_jqe6g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=138803647]
+position = Vector2(-2, -6)
+shape = SubResource("CircleShape2D_2sw5t")
+
+[node name="PlayerName" type="Label" parent="." unique_id=269813665]
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 370.99997
+offset_bottom = 49.0
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/font_size = 50
+text = "LE BAO"
+horizontal_alignment = 1
+vertical_alignment = 1

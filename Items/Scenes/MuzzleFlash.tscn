@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cprdyhyip5tj3"]
+
+[ext_resource type="Texture2D" uid="uid://b1j01oicebys3" path="res://Assets/texture/muzzle_bullet.png" id="1_opyex"]
+[ext_resource type="Script" uid="uid://dqq755fv6op0w" path="res://Items/Scripts/MuzzleFlash.gd" id="1_t1keh"]
+
+[node name="MuzzleFlash" type="Node2D" unique_id=1972260784]
+z_index = 1000
+texture_filter = 1
+position = Vector2(23, 37)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_t1keh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1292487582]
+position = Vector2(16, 2)
+texture = ExtResource("1_opyex")

@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://b2wnkc5vw885o"]
+
+[ext_resource type="Script" uid="uid://dpc4jdgobnix5" path="res://Script/InventoryUI.gd" id="1_la3np"]
+[ext_resource type="PackedScene" uid="uid://d2euwt4obb112" path="res://UI/EquipmentSlot.tscn" id="2_7cfyf"]
+[ext_resource type="PackedScene" uid="uid://bvisoarsyur8c" path="res://UI/ItemTooltip.tscn" id="3_7cfyf"]
+
+[node name="InventoryUi" type="Control" unique_id=1858316912]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_la3np")
+
+[node name="Panel" type="Panel" parent="." unique_id=2105539772]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -148.0
+offset_right = 316.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Panel" unique_id=1673299730]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 23.0
+
+[node name="EquipmentPanel" type="Panel" parent="Panel" unique_id=1037009600]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 250.0
+grow_vertical = 2
+
+[node name="EquipmentTitle" type="Label" parent="Panel/EquipmentPanel" unique_id=398745512]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 116.0
+offset_bottom = 20.0
+text = "Player stats đồ"
+
+[node name="WeaponLeftSlot" parent="Panel/EquipmentPanel" unique_id=420448570 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 186.0
+offset_right = 62.0
+offset_bottom = 202.0
+scale = Vector2(2, 2)
+
+[node name="WeaponRightSlot" parent="Panel/EquipmentPanel" unique_id=207152887 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 223.0
+offset_right = 62.0
+offset_bottom = 239.0
+scale = Vector2(2, 2)
+
+[node name="HelmetSlot" parent="Panel/EquipmentPanel" unique_id=531992309 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 186.0
+offset_right = 99.0
+offset_bottom = 202.0
+scale = Vector2(2, 2)
+
+[node name="ArmorSlot" parent="Panel/EquipmentPanel" unique_id=1676992859 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 119.999985
+offset_top = 186.0
+offset_right = 135.99998
+offset_bottom = 202.0
+scale = Vector2(2, 2)
+
+[node name="PantsSlot" parent="Panel/EquipmentPanel" unique_id=1399206966 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 223.0
+offset_right = 99.0
+offset_bottom = 239.0
+scale = Vector2(2, 2)
+
+[node name="BootsSlot" parent="Panel/EquipmentPanel" unique_id=353363064 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 223.0
+offset_right = 136.0
+offset_bottom = 239.0
+scale = Vector2(2, 2)
+
+[node name="BackpackSlot" parent="Panel/EquipmentPanel" unique_id=2121990565 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 194.00003
+offset_top = 186.0
+offset_right = 194.00003
+offset_bottom = 186.0
+scale = Vector2(2, 2)
+
+[node name="RingSlot1" parent="Panel/EquipmentPanel" unique_id=820562992 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 157.00003
+offset_top = 186.0
+offset_right = 173.00003
+offset_bottom = 202.0
+scale = Vector2(2, 2)
+
+[node name="RingSlot2" parent="Panel/EquipmentPanel" unique_id=60829950 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 157.00003
+offset_top = 223.0
+offset_right = 173.00003
+offset_bottom = 239.0
+scale = Vector2(2, 2)
+
+[node name="NecklaceSlot" parent="Panel/EquipmentPanel" unique_id=2049691013 instance=ExtResource("2_7cfyf")]
+layout_mode = 0
+offset_left = 194.00002
+offset_top = 223.0
+offset_right = 210.00002
+offset_bottom = 239.0
+scale = Vector2(2, 2)
+
+[node name="PlayerPreview" type="Control" parent="Panel/EquipmentPanel" unique_id=288502171]
+anchors_preset = 0
+offset_left = 7.0
+offset_top = 21.0
+offset_right = 120.0
+offset_bottom = 161.0
+
+[node name="Stats" type="VBoxContainer" parent="Panel/EquipmentPanel" unique_id=513190273]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 21.0
+offset_right = 241.0
+offset_bottom = 163.0
+
+[node name="InventoryPanel" type="Panel" parent="Panel" unique_id=649063023]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -250.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="InventoryTitle" type="Label" parent="Panel/InventoryPanel" unique_id=987905288]
+layout_mode = 0
+offset_left = 10.0
+offset_top = -3.0
+offset_right = 109.0
+offset_bottom = 20.0
+text = "Inventory đồ"
+
+[node name="SlotsScroll" type="ScrollContainer" parent="Panel/InventoryPanel" unique_id=211148613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 23.0
+offset_right = -13.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/InventoryPanel/SlotsScroll" unique_id=975183075]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="SlotsGrid" type="GridContainer" parent="Panel/InventoryPanel/SlotsScroll/MarginContainer" unique_id=180166086]
+layout_mode = 2
+
+[node name="ItemTooltip" parent="." unique_id=1134623788 instance=ExtResource("3_7cfyf")]
+visible = false
+layout_mode = 0

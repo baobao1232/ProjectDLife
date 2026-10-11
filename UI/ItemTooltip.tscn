@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://bvisoarsyur8c"]
+
+[ext_resource type="Script" uid="uid://ba1vw35y5rntd" path="res://Script/ItemTooltip.gd" id="1_70gs5"]
+
+[node name="ItemTooltip" type="Panel" unique_id=1134623788]
+texture_filter = 1
+custom_minimum_size = Vector2(220, 0)
+script = ExtResource("1_70gs5")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1146479421]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 114.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1727958641]
+layout_mode = 2
+
+[node name="ItemHeader" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=190975454]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/ItemHeader" unique_id=584341114]
+layout_mode = 2
+
+[node name="ItemInfo" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ItemHeader" unique_id=266162025]
+layout_mode = 2
+
+[node name="ItemName" type="Label" parent="MarginContainer/VBoxContainer/ItemHeader/ItemInfo" unique_id=1726858488]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ItemRarity" type="Label" parent="MarginContainer/VBoxContainer/ItemHeader/ItemInfo" unique_id=312986128]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Stats" type="GridContainer" parent="MarginContainer/VBoxContainer" unique_id=997605125]
+layout_mode = 2
+columns = 2
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1530416462]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2010800780]
+custom_minimum_size = Vector2(63, 22)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+
+[node name="UseButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons" unique_id=551404957]
+custom_minimum_size = Vector2(27, 22)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Use"
+
+[node name="DropButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons" unique_id=996693472]
+custom_minimum_size = Vector2(32, 22)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Drop"

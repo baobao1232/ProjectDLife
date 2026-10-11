@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://di5fbi5lq0t1t"]
+
+[ext_resource type="Script" uid="uid://bkr4tvgk28iq2" path="res://Items/Scripts/ItemDebug.gd" id="1_x5dp5"]
+[ext_resource type="Texture2D" uid="uid://g8o2lxcvmys4" path="res://Assets/texture/weapon/gun/ak74.png" id="2_lcs4r"]
+[ext_resource type="Script" uid="uid://01fgdbct33ir" path="res://Items/Scripts/ItemOption.gd" id="3_mkfyt"]
+[ext_resource type="Script" uid="uid://rqmkwb13jnd6" path="res://Items/Scripts/ItemData.gd" id="4_eneog"]
+[ext_resource type="Script" uid="uid://1k7p8yrr35dp" path="res://Items/Scripts/ItemStat.gd" id="5_d5g4g"]
+
+[sub_resource type="Resource" id="Resource_7bljd"]
+script = ExtResource("5_d5g4g")
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_rndte"]
+script = ExtResource("5_d5g4g")
+type = 1
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_c6e8u"]
+script = ExtResource("5_d5g4g")
+type = 2
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_sjg6u"]
+script = ExtResource("5_d5g4g")
+type = 5
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_muhhd"]
+script = ExtResource("5_d5g4g")
+type = 4
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_pd8a5"]
+script = ExtResource("5_d5g4g")
+type = 7
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_uw4c6"]
+script = ExtResource("5_d5g4g")
+type = 8
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_3kx2n"]
+script = ExtResource("5_d5g4g")
+type = 9
+metadata/_custom_type_script = "uid://1k7p8yrr35dp"
+
+[sub_resource type="Resource" id="Resource_3twp4"]
+script = ExtResource("4_eneog")
+id = "01"
+item_name = "AK74"
+icon = ExtResource("2_lcs4r")
+world_sprite = ExtResource("2_lcs4r")
+item_type = 0
+equipment_type = 5
+description = "Đây là 1 cây súng xịn, được craft bởi Lêo Bảo"
+grip_position = Vector2(-5, 2)
+muzzle_position = Vector2(14, -3)
+stats = Array[ExtResource("5_d5g4g")]([SubResource("Resource_7bljd"), SubResource("Resource_rndte"), SubResource("Resource_c6e8u"), SubResource("Resource_sjg6u"), SubResource("Resource_muhhd"), SubResource("Resource_pd8a5"), SubResource("Resource_uw4c6"), SubResource("Resource_3kx2n")])
+metadata/_custom_type_script = "uid://rqmkwb13jnd6"
+
+[node name="TestItem" type="Node" unique_id=575114767]
+script = ExtResource("1_x5dp5")
+test_item = SubResource("Resource_3twp4")
